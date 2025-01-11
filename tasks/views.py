@@ -1,17 +1,22 @@
 from django.shortcuts import render
 #from django.template import loader
 from .models import Task
+from .forms import TaskForm
 
 # Create your views here.
 
 def index(request):
-    #mytasks = Task.objects.all().values
     #template = loader.get_template('tasks.html')
-    context = {
-        'tasks': Task
-    }
+    context = {}
+    context['title'] = 'home'
+
     return render(request, 'index.html',context)
 
 def tasks(request):
     context = {}
-    return(request, 'tasks.html',context)
+    form = TaskForm
+    tasks = Task.objects.all().values
+    context['tasks'] = tasks
+    context['title'] = 'tasks'
+    context['form']  =  form
+    return render(request, 'tasks.html',context)

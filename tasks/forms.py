@@ -2,5 +2,6 @@ from django import forms
 from tasks.models import Task
 
 class TaskForm(forms.ModelForm):
-    model = Task
-    fields = []
+    class Meta:
+        model = Task
+        fields = ['title','description', 'due_date']

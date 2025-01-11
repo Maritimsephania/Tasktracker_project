@@ -1,5 +1,26 @@
 {% extends 'base.html' %}
 
 {% block content %}
+    <h1>Tasks page</h1>
+    <table>
+        <tr><th>Title</th><th>Description</th>
+            <th>Due date</th><th>Action</th>
+        </tr>
+        {% for task in tasks%}
+            <tr>
+                <td>{{task.title}}</td>
+                <td>{{task.description}}</td>
+                <td>{{task.due_date}}</td>
+                <td>
+                    <button name = "edit">Edit</button>
+                    <button name = "delete">Delete</button>
 
+                </td>
+
+            </tr>
+        {% endfor %}
+    </table>
+
+    <a href = "{% url 'home'%}">Home page</a>
+    <button name = "add_task">Add task</button>
 {% endblock %}
