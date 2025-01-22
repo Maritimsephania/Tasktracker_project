@@ -6,13 +6,24 @@
         <tr><th>Title</th><th>Description</th>
             <th>Due date</th><th>Action</th>
         </tr>
+        <!-- <tr>
+            {%for field in form%}
+
+            {% endfor %}
+        </tr> -->
+
         {% for task in tasks%}
             <tr>
                 <td>{{task.title}}</td>
                 <td>{{task.description}}</td>
                 <td>{{task.due_date}}</td>
                 <td>
-                    <button name = "edit">Edit</button>
+                    <form method="POST" action="{% url 'save' %}">
+                        {% csrf_token %}
+                        <button type="submit" name = "edit">Edit</button>
+
+                    </form>
+
                     <button name = "delete">Delete</button>
 
                 </td>
@@ -20,7 +31,11 @@
             </tr>
         {% endfor %}
     </table>
+    <p>{{error}}</p>
 
     <a href = "{% url 'home'%}">Home page</a>
-    <button name = "add_task">Add task</button>
+    <form method="POST" action="{% url 'save' %}">
+        {% csrf_token %}
+        <button type="submit" name = "task">Add Task</button>
+    </form>
 {% endblock %}
