@@ -3,7 +3,8 @@
 {% block content %}
     <h1>Tasks page</h1>
     <form method="POST" action="{% url 'tasks' %}">
-    <table>
+
+    <table class="table table-dark table-striped">
         <tr><th>Title</th><th>Description</th>
             <th>Due date</th><th>Action</th>
         </tr>
@@ -20,7 +21,7 @@
                         <button type="submit" name = "edit" value="{{task.id}}">Edit</button>
 
                     
-
+                    {% csrf_token %}
                     <button name = "delete" value="{{task.id}}" >Delete</button>
 
                 </td>
@@ -30,10 +31,16 @@
     </table>
     </form>
     <p>{{error}}</p>
+    <div class="container-fluid" >
 
+    <div class="position-relative">
+    <div class="position-absolute bottom-0 start-50 translate-middle-x"></div>
     <a href = "{% url 'home'%}">Home page</a>
+    
     <form method="POST" action="{% url 'save' %}">
         {% csrf_token %}
         <button type="submit" name = "task">Add Task</button>
     </form>
+    </div>
+    </div>
 {% endblock %}

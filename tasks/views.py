@@ -26,46 +26,38 @@ def tasks(request):
             task = Task.objects.get(id = primary_key)
             task.delete()
             return redirect('tasks')
+        elif 'edit' in request.POST:
+             primary_key = request.POST.get('edit')
+             task = Task.objects.get(id = primary_key)
+             form = TaskForm(instance= task)
+            
+             return render(request, 'save.html', {'form': form, 'task_id': primary_key})
         
 
             
     return render(request, 'tasks.html',context)
 
 
-# def save(request):
-#     # Ensure access is via POST only
-#     # if request.method != "POST":
-#     #      return HttpResponseForbidden("Access denied.")
-    
-#     context = {}
-#     form = TaskForm()#request.POST or None)
-#     context['title'] = 'save'
-#     if request.method == "POST":
-#         if 'save' in request.POST:
-#             #if form.is_valid():
-#             form = TaskForm(request.POST)
-#             form.save()
-#             return redirect('tasks')
-#     else:
-#            return HttpResponseForbidden("Access denied.") 
-#     context['form']  =  form
-
-#     return render(request, 'save.html',context)
-
-
 def save(request):
-    context = {'title': 'save'}
-    form = TaskForm(request.POST or None)  # Initialize the form with POST data if available
+    context = {}
+
+    context['title'] = 'save'
+    form = TaskForm()  # Initialize the form with POST data if available
 
     if request.method == "POST":
         if 'save' in request.POST:
-            form = TaskForm(request.POST)
+            primary_key =request.POST.get('save')
+            if not primary_key:
+                form = TaskForm(request.POST)
+            else:
+                task = Task.objects.get(id=primary_key)
+                form = TaskForm(request.POST,instance=task)
             form.save() 
             return redirect('tasks')
-        elif 'edit' in request.POST:
-            primary_key = request.POST.get('edit')
-            task = Task.objects.get(id = primary_key)
-            form = TaskForm(instance= task)
+        # elif 'edit' in request.POST:
+        #     primary_key = request.POST.get('edit')
+        #     task = Task.objects.get(id = primary_key)
+        #     form = TaskForm(instance= task)
     else:
         return HttpResponseForbidden("Access denied.") 
 
