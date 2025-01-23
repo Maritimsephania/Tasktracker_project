@@ -2,25 +2,38 @@
 
 {% block content %}
     <h1>Tasks page</h1>
+    <form method="POST" action="{% url 'tasks' %}">
     <table>
         <tr><th>Title</th><th>Description</th>
             <th>Due date</th><th>Action</th>
         </tr>
+
+
         {% for task in tasks%}
             <tr>
-                <td>{{task.title}}</td>
+                <td>{{task.title}}-- {{task.id}}</td>
                 <td>{{task.description}}</td>
                 <td>{{task.due_date}}</td>
                 <td>
-                    <button name = "edit">Edit</button>
-                    <button name = "delete">Delete</button>
+                    
+                        {% csrf_token %}
+                        <button type="submit" name = "edit" value="{{task.id}}">Edit</button>
+
+                    
+
+                    <button name = "delete" value="{{task.id}}" >Delete</button>
 
                 </td>
 
             </tr>
         {% endfor %}
     </table>
+    </form>
+    <p>{{error}}</p>
 
     <a href = "{% url 'home'%}">Home page</a>
-    <button name = "add_task">Add task</button>
+    <form method="POST" action="{% url 'save' %}">
+        {% csrf_token %}
+        <button type="submit" name = "task">Add Task</button>
+    </form>
 {% endblock %}
