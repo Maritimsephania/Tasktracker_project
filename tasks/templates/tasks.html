@@ -2,34 +2,41 @@
 
 {% block content %}
     <h1>Tasks page</h1>
-    <form method="POST" action="{% url 'tasks' %}">
 
+    
     <table class="table table-dark table-striped">
-        <tr><th>Title</th><th>Description</th>
+        <th>Title</th><th>Description</th>
             <th>Due date</th><th>Action</th>
         </tr>
 
 
         {% for task in tasks%}
             <tr>
-                <td>{{task.title}}-- {{task.id}}</td>
+                <td>{{task.title}}</td>
                 <td>{{task.description}}</td>
                 <td>{{task.due_date}}</td>
                 <td>
-                    
+                    <ul style="float: left;">
+                    <li>
+                    <form method="POST" action="{% url 'save' %}">
                         {% csrf_token %}
                         <button type="submit" name = "edit" value="{{task.id}}">Edit</button>
 
-                    
+                    </form>
+                    </li>
+                    <li>
+                    <form method="POST" action="{% url 'tasks' %}">
                     {% csrf_token %}
                     <button name = "delete" value="{{task.id}}" >Delete</button>
-
+                    </form>
+                    </li>
+                    </ul>
                 </td>
 
             </tr>
         {% endfor %}
     </table>
-    </form>
+    
     <p>{{error}}</p>
     <div class="container-fluid" >
 
@@ -40,7 +47,7 @@
     <form method="POST" action="{% url 'save' %}">
         {% csrf_token %}
         <button type="submit" name = "task">Add Task</button>
-    </form>
+    
     </div>
     </div>
 {% endblock %}
