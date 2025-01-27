@@ -1,12 +1,30 @@
 {% extends 'base.html' %}
 
-{% block content%}
-<form method="post" >
+
+{% block content %}
+<h1>Your Task</h1>
+<div class="container mt-3">  
+    <form method="post" class="row">  
     {% csrf_token %}
+    <div class="list-group">
 
-    {{form}}
-    <button type="submit" name = "save" value ="{{task_id}}">Save</button>
-</form>
+    <ul>
+        <p>Title:</p>
+        <li>{{form.title}}</li>
+        <p>Description:</p>
+        <li>{{form.description}}</li>
+        <p>Date:</p>
+         <li>{{form.due_date}}</li><br>
+    </ul>
+    </div>
 
+    {% if form.instance.id %}
+    <!-- <input type="hidden" name="task_id" value="{{ form.instance.id }}"> -->
+    <button type="submit" name = "save" value="{{ form.instance.id }}" >Update</button> 
+    {% else %}
+    <button type="submit" name = "save" >Save</button> 
+    {% endif %}
 
+  </form>
+</div>
 {% endblock %}

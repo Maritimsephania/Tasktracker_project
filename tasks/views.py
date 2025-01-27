@@ -26,12 +26,13 @@ def tasks(request):
             task = Task.objects.get(id = primary_key)
             task.delete()
             return redirect('tasks')
-        elif 'edit' in request.POST:
-             primary_key = request.POST.get('edit')
-             task = Task.objects.get(id = primary_key)
-             form = TaskForm(instance= task)
+        # elif 'edit' in request.POST:
+        #      primary_key = request.POST.get('edit')
+        #      task = Task.objects.get(id = primary_key)
+        #      form = TaskForm(instance= task)
+        #      print("task id ", primary_key)
             
-             return render(request, 'save.html', {'form': form, 'task_id': primary_key})
+        #      return render(request, 'save.html', {'form': form, 'task_id': primary_key})
         
 
             
@@ -39,6 +40,7 @@ def tasks(request):
 
 
 def save(request):
+    print("This is the requst:",request.body)
     context = {}
 
     context['title'] = 'save'
@@ -52,12 +54,13 @@ def save(request):
             else:
                 task = Task.objects.get(id=primary_key)
                 form = TaskForm(request.POST,instance=task)
-            form.save() 
+            form.save()
+            form = TaskForm()
             return redirect('tasks')
-        # elif 'edit' in request.POST:
-        #     primary_key = request.POST.get('edit')
-        #     task = Task.objects.get(id = primary_key)
-        #     form = TaskForm(instance= task)
+        elif 'edit' in request.POST:
+            primary_key = request.POST.get('edit')
+            task = Task.objects.get(id = primary_key)
+            form = TaskForm(instance= task)
     else:
         return HttpResponseForbidden("Access denied.") 
 

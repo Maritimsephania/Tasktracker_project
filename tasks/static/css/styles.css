@@ -74,9 +74,9 @@ ul {
     overflow: hidden;
   }
   
-  li {
+  /* li {
     float: left;
-  }
+  } */
   
   li a {
     display: block;
@@ -89,3 +89,9 @@ ul {
   li a:hover {
     background-color: #111;
   }
+  
+  .table-responsive {
+    max-height: 200px; /* Adjust based on how many rows you expect */
+    overflow-y: auto; /* Scroll if it exceeds max-height */
+  }
+  
