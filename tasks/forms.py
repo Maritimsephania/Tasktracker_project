@@ -8,7 +8,7 @@ class TaskForm(forms.ModelForm):
         fields = ['title','description','due_date']
         widgets = {
             'title':forms.TextInput(attrs={'class':'form-control'}),
-            'description':forms.Textarea(attrs={'class':'form-control'}),
+            'description':forms.Textarea(attrs={'class':'form-control', 'rows':1}),
             'due_date':forms.DateTimeInput(attrs={'class':'form-control', 'type':'datetime-local'})
 
         }

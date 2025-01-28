@@ -1,13 +1,11 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponseForbidden
-#from django.template import loader
 from .models import Task
 from .forms import TaskForm
 
 # Create your views here.
 
 def index(request):
-    #template = loader.get_template('tasks.html')
     context = {}
     context['title'] = 'home'
 
@@ -26,25 +24,15 @@ def tasks(request):
             task = Task.objects.get(id = primary_key)
             task.delete()
             return redirect('tasks')
-        # elif 'edit' in request.POST:
-        #      primary_key = request.POST.get('edit')
-        #      task = Task.objects.get(id = primary_key)
-        #      form = TaskForm(instance= task)
-        #      print("task id ", primary_key)
-            
-        #      return render(request, 'save.html', {'form': form, 'task_id': primary_key})
-        
-
-            
+               
     return render(request, 'tasks.html',context)
 
 
 def save(request):
-    print("This is the requst:",request.body)
     context = {}
 
     context['title'] = 'save'
-    form = TaskForm()  # Initialize the form with POST data if available
+    form = TaskForm()
 
     if request.method == "POST":
         if 'save' in request.POST:

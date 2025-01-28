@@ -11,13 +11,16 @@
 
             {{form.as_p}}
             {% if form.instance.id %}
-              <button type="submit" name = "save" value="{{ form.instance.id }}" >Update</button> 
+              <button class="btn btn-primary" type="submit"  name = "save" value="{{ form.instance.id }}" >Update</button> 
             {% else %}
-              <button type="submit" name = "save" >Save</button> 
+              <button class="btn btn-success" type="submit" name = "save" >Save</button> 
             {% endif %}
 
         </form>
       </div>
     </div>
   </div>
+
+
+
 {% endblock %}
