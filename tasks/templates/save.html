@@ -3,28 +3,21 @@
 
 {% block content %}
 <h1>Your Task</h1>
-<div class="container mt-3">  
-    <form method="post" class="row">  
-    {% csrf_token %}
-    <div class="list-group">
+  <div class="form-group">
+      <div class="row g-3">
+        <div class="col-sm-7">
+          <form method="post" >  
+            {% csrf_token %}
 
-    <ul>
-        <p>Title:</p>
-        <li>{{form.title}}</li>
-        <p>Description:</p>
-        <li>{{form.description}}</li>
-        <p>Date:</p>
-         <li>{{form.due_date}}</li><br>
-    </ul>
+            {{form.as_p}}
+            {% if form.instance.id %}
+              <button type="submit" name = "save" value="{{ form.instance.id }}" >Update</button> 
+            {% else %}
+              <button type="submit" name = "save" >Save</button> 
+            {% endif %}
+
+        </form>
+      </div>
     </div>
-
-    {% if form.instance.id %}
-    <!-- <input type="hidden" name="task_id" value="{{ form.instance.id }}"> -->
-    <button type="submit" name = "save" value="{{ form.instance.id }}" >Update</button> 
-    {% else %}
-    <button type="submit" name = "save" >Save</button> 
-    {% endif %}
-
-  </form>
-</div>
+  </div>
 {% endblock %}
