@@ -8,8 +8,9 @@
         <div class="col-sm-7">
           <form method="post" >  
             {% csrf_token %}
-
-            {{form.as_p}}
+            <div   class="text-reset>
+              {{form.as_p}}
+            </div>
             {% if form.instance.id %}
               <button class="btn btn-primary" type="submit"  name = "save" value="{{ form.instance.id }}" >Update</button> 
             {% else %}
