@@ -94,4 +94,13 @@ ul {
     max-height: 200px; /* Adjust based on how many rows you expect */
     overflow-y: auto; /* Scroll if it exceeds max-height */
   }
+body{
+    background-image: url("../images/background.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    text-decoration-color: white;
+ 
+}
   
