@@ -7,7 +7,7 @@ class Task(models.Model):
     description = models.TextField(blank=True, null=True)
     completed = models.BooleanField(default=False)
     due_date = models.DateTimeField(blank=True, null=True)
-#Determines what is displayed on the admin interface
+    
     def __str__(self):
         return self.title
     
